@@ -36,8 +36,8 @@ app.post("/login", (req, res) => {
 	const { username, password } = req.body;
 
 	if (
-		username === process.env.BASIC_AUTH_USER &&
-		password === process.env.BASIC_AUTH_PASSWORD
+		username === process.env.AUTH_USER &&
+		password === process.env.AUTH_PASSWORD
 	) {
 		req.session.user = { username };
 		return res.send("Login successful");

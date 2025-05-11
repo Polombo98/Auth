@@ -12,8 +12,8 @@ const port = 3000;
 // In-memory user and token stores
 const users = [
 	{
-		username: process.env.BASIC_AUTH_USER,
-		password: process.env.BASIC_AUTH_PASSWORD,
+		username: process.env.AUTH_USER,
+		password: process.env.AUTH_PASSWORD,
 	},
 ];
 const tokenStore = new Map();
