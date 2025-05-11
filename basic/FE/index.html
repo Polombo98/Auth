@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Basic auth</title>
+	</head>
+	<body>
+		<h1>Basic auth</h1>
+		<p>
+			Basic authentication is a simple authentication scheme built into
+			the HTTP protocol. It is based on challenge-response mechanism that
+			involves the client sending HTTP requests with authorization
+			information.
+		</p>
+		<p>
+			In this example, we will use basic authentication to protect a web
+			page. The user will be prompted to enter a username and password.
+		</p>
+		<p>To test this example, you can use the following credentials:</p>
+		<ul>
+			<li>Username: admin</li>
+			<li>Password: admin</li>
+		</ul>
+		<form>
+			<input type="text" id="username" placeholder="Username" />
+			<input type="password" id="password" placeholder="Password" />
+			<button type="submit">Login</button>
+		</form>
+	</body>
+	<script>
+		document
+			.querySelector("form")
+			.addEventListener("submit", function (event) {
+				event.preventDefault();
+				const username = document.getElementById("username").value;
+				const password = document.getElementById("password").value;
+				if (!username || !password)
+					alert("Please enter username and password");
+				const base64Credentials = btoa(`${username}:${password}`);
+				fetch("http://localhost:3000/", {
+					headers: {
+						Authorization: `Basic ${base64Credentials}`,
+					},
+				})
+					.then((response) => {
+						if (!response.ok) {
+							alert("Login failed");
+							return;
+						}
+						alert("Login successful");
+					})
+					.catch((error) => {
+						console.error("Error:", error);
+					});
+			});
+	</script>
+</html>
